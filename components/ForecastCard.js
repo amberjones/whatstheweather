@@ -8,12 +8,59 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     borderRadius: 20,
   },
+  time: {
+    fontSize: 38,
+  },
+  notes: {
+    fontSize: 18,
+    textTransform: 'capitalize',
+  },
 });
 //We're not using any state in this component, it'll just render props that we pass to it
 export function ForecastCard(props) {
+  let time;
+
+  // Create a new date from the passed date time
+  var date = new Date(this.props.detail.dt * 1000);
+
+  // Hours part from the timestamp
+  var hours = date.getHours();
+
+  // Minutes part from the timestamp
+  var minutes = '0' + date.getMinutes();
+
+  time = hours + ':' + minutes.substr(-2);
   return (
     <Card containerStyle={styles.card}>
-
+      {/* add into each card a title, containing the location */}
+      <Text style={styles.notes}>{this.props.location}</Text>
+      {/* add the image and time using a View component, and Flexbox to position them on each side */}
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <Image
+          style={{width: 100, height: 100}}
+          source={{
+            uri:
+              'https://openweathermap.org/img/w/' +
+              this.props.detail.weather[0].icon +
+              '.png',
+          }}
+        />
+        <Text style={styles.time}>{time}</Text>
+      </View>
+      <Divider style={{backgroundColor: '#dfe6e9', marginVertical: 20}} />
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Text style={styles.notes}>
+          {this.props.detail.weather[0].description}
+        </Text>
+        <Text style={styles.notes}>
+          {Math.round(this.props.detail.main.temp * 10) / 10}&#8451;
+        </Text>
+      </View>
     </Card>
   );
 }
