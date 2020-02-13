@@ -10,7 +10,7 @@ import {WEATHER_API_KEY} from 'react-native-dotenv';
  * - An error string indicating if there's been an error in the API response
  * And then initialise these in the constructor for the class
  */
-export default class App extends Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -76,6 +76,5 @@ export default class App extends Component {
         )}
       />
     );
-}
-
+  }
 }
